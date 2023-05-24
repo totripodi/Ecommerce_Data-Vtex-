@@ -1,0 +1,50 @@
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th>productId</th>
+      <th>productName</th>
+      <th>brand</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if data %}
+    {% for c in data %}
+    <tr>
+      <td class="text-success">{{c.productId}}</td>
+      <td class="text-success">{{c.productName}}</td>
+      <td class="text-success">{{c.brand}}</td>
+      <td><a href="#" class="miEnlace" data-product-id="{{c.productId}}" data-product-data="{{data}}">Ver detalles</a></td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+      <td colspan="4" style="text-align:center;">No se encontraron productos que coincidan con los datos aportados.</td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+
+<form id="product-form" method="POST" action="/detail_product">
+  <input type="hidden" id="product-id" name="product_id" value="">
+  <input type="hidden" id="data" name="data" value="">
+</form>
+
+<script>
+  const enlaces = document.querySelectorAll('.miEnlace');
+  const formulario = document.getElementById('product-form');
+  const productIdCampo = document.getElementById('product-id');
+  const dataCampo = document.getElementById('data');
+  
+
+  enlaces.forEach(enlace => {
+    enlace.addEventListener('click', function(evento) {
+      evento.preventDefault();
+      const productIdValor = this.getAttribute('data-product-id');
+      const dataValor = JSON.stringify(this.getAttribute('data-product-data')); // Aquí se convierte en una cadena de texto JSON
+      productIdCampo.value = productIdValor;
+      dataCampo.value = dataValor;
+      formulario.submit();
+    });
+  });
+</script>

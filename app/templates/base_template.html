@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ejemplo de Bootstrap</title>
+    <!-- Agregamos los enlaces a los archivos CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      .sidebar {
+        width: 100%;
+        min-height: 100vh;
+        background-color: #333;
+        color: #fff;
+        padding: 1rem;
+        margin: 0;
+        font-size: 1.2rem;
+        line-height: 2rem;
+        overflow-y: auto;
+        box-sizing: border-box;
+      }
+      .sidebar ul li {
+        margin-bottom: 0.5rem;
+      }
+      .sidebar .nav-link {
+        color: #fff;
+        background-color: #333;
+        border-color: #333;
+        border-radius: 10px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+      }
+      .sidebar .nav-link.active {
+        background-color: #fff;
+        color: #333;
+        border-color: #333;
+      }
+    </style>
+  </head>
+  <body>
+  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 d-none d-md-block sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active btn-block" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-block" href="/customer_query">Customer Query</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-block" href="/orders_query">Orders Query</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-block" href="/orders_detail_query">Order Detail Query</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-block" href="/product_search">Product Search</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+        <!-- Aquí va el contenido de la página -->
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+  
+  <!-- Agregamos el enlace al archivo JS de Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+  
+</body>
+
+
+
+</html>

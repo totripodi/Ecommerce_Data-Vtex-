@@ -1,0 +1,87 @@
+<h1 class="text-center my-4">Informacion de ordenes</h1>
+    {%if "error" in data %}
+    <div style="text-align: center;">
+        <h4 style="background-color:red; color:white; display:inline-block; padding:5px; margin:auto;border-radius: 10px;">¡No se encontraron ordenes que coincidan con los datos aportados!</h4>
+     </div>
+     <div class="d-flex justify-content-center my-5">
+      <button type="button" class="btn btn-primary" onclick="history.back()">volver</button>
+  </div>
+    {%else%}
+  
+    <table class="table ">
+      <tbody>
+        <tr>
+          <td class="text-primary">OrderId:</td>
+          <td class="text-success">{{data.orderId}}</td>
+        </tr>
+        <tr>
+          <td class="text-primary">SalesChannel:</td>
+          <td class="text-success">{{data.salesChannel}}</td>
+        </tr>
+        <tr>
+          <td class="text-primary">StatusDescription:</td>
+          <td class="text-success">{{data.statusDescription}}</td>
+        </tr>
+        <tr>
+          <td class="text-primary">Order total:</td>
+          <td class="text-success">{{formatted_value}}</td>
+        </tr>
+        <tr>
+          <td class="text-primary">CreationDate:</td>
+          <td class="text-success">{{data.creationDate}}</td>
+        </tr>
+        <tr>
+          <td class="text-primary">LastChange:</td>
+          <td class="text-success">{{data.lastChange}}</td>
+        </tr>
+        <tr>
+          <td class="text-danger">Cliente:</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td class="text-success">{{data.clientProfileData.email}}</td>
+        </tr>
+        <tr>
+          <td>FirstName:</td>
+          <td class="text-success">{{data.clientProfileData.firstName}}</td>
+        </tr>
+        <tr>
+          <td>LastName:</td>
+          <td class="text-success">{{data.clientProfileData.lastName}}</td>
+        </tr>
+        <tr>
+          <td>UserProfileId:</td>
+          <td class="text-success">{{data.clientProfileData.userProfileId}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center my-3">
+      <button type="button" class="btn btn-dark" onclick="history.back()">volver</button>
+  </div>
+    <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>Product Id</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>ListPrice</th>
+            <th>image</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in data["items"] %}
+          <tr>
+            <td> {{i.productId}} </td>
+            <td> {{i.name}} </td>
+            <td> {{i.quantity}} </td>
+            <td> {{formatted_price}} </td>
+            <td> {{formatted_listprice}} </td>
+            <td> <img src=" {{i.imageUrl}} " alt="image url" class="img-thumbnail"> </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+      
+        {%endif%}

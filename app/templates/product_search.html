@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>product_search</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <!--####################### NAV #############################-->
+  {% extends "base_template.html" %}
+
+  <!--#########################################################-->
+  {% block content %}
+  <h3 class='d-flex justify-content-center mt-3'>Product Search:</h3> 
+  <form method='POST'>
+     <div class='row d-flex justify-content-center'>
+      <input type='text' name='search' id="search" value="{{search}}">    
+      </div>  
+    <div class='text-center mt-5 mb-3'>
+      <button class='btn btn-dark' id="continuar" type='button'>Continuar</button>
+      
+    </div> 
+  </form>
+
+  <div id="my-list"></div>
+
+  <script>
+    $(document).ready(function() {
+      $("#continuar").click(function() {
+        var search = $("#search").val();
+        $.ajax({
+          url: "/opc_4",
+          type: 'get',
+          dataType: 'json',
+          data: {
+            search: search
+          },
+          success: function(data) {
+            $('#my-list').html(data.template);
+          }
+        });
+      });
+    });
+  </script>
+
+    {%endblock%}
+     
+
+</body>
+</html>

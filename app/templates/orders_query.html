@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>opcion 2</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <!--####################### NAV #############################-->
+  {% extends "base_template.html" %}
+
+  <!--#########################################################-->
+  {% block content %}
+  <div class='container'>
+    <h3 class='d-flex justify-content-center mt-3 '>Ingrese un email:</h3>
+  <form action='/orders_query' method='POST'> 
+      <div class='row d-flex justify-content-center'>
+      <input type='text' name='email' id="email" value="{{email}}"  >
+    </div> 
+      <div class='form-group'>
+      <label for='fecha_inicial'>Fecha inicial</label>
+      <input type='date' id="inicial" name='inicial' class='form-control'>
+    </div>
+      <div class='form-group'>
+      <label for='fecha_final'>Fecha final</label>
+      <input type='date' id="final" name='final' class='form-control'>
+    </div>
+    <div class='text-center mt-5'>
+      <button class='btn btn-dark' id="continuar" type='button'>Continuar</button>
+      <button class="btn btn-success" id="modificar-email">Modificar email</button>
+    </div> 
+  </form>
+
+  <div id="my-list"></div>
+  <script>
+    var emailEnabled = false; 
+    
+    document.getElementById("modificar-email").addEventListener("click", function(event) {
+            // Prevenir comportamiento predeterminado del botón
+            event.preventDefault();
+        
+            // Activar inputs solo si no están ya activados
+            if (!emailEnabled) {
+              document.getElementById("email").disabled = false;
+              emailEnabled = true;  }})
+
+
+    $('#continuar').click(function(event) {
+      event.preventDefault();
+      var email_opc = $('#email').val();
+      var inicial = $('#inicial').val();
+      var final = $('#final').val();
+      $.ajax({
+        url: '/opc_2',
+        type: 'get',
+        dataType: 'json',
+        data: { email_opc: email_opc, inicial: inicial, final: final },
+        success: function(data) {
+          $('#my-list').html(data.template);
+        }
+      }); 
+    });
+  </script>
+    {%endblock%}
+
+
+</body>
+</html>    

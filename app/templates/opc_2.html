@@ -1,0 +1,57 @@
+
+<!--opc_2.html-->
+<body>
+    <div class="container">
+        <h1 class="text-center my-3">Ordenes del cliente</h1>
+        <table class="table" style="margin:0; padding:0; border-collapse:collapse;">
+          <tbody class="text-center">
+            <tr>
+              <td style="padding: 5px">Email:</td>
+              <td class="text-success" style="padding: 5px">{{email_opc}}</td>
+            </tr>
+            <tr>
+              {%if filtrar=='si' %}
+              <td style="padding: 5px">Periodo de consulta:</td>
+              <td class="text-success" style="padding: 5px">{{f_inicial}} a {{f_final}}</td>
+              {%endif%}
+            </tr>
+          </tbody>
+        </table>
+        
+        
+        {% if datos==False  %}
+        <div class="mt-5" style="text-align: center;">
+            <h4 style="background-color:red; color:white; display:inline-block; padding:5px; margin:auto;border-radius: 10px;">¡No se encontraron ordenes que coincidan con los datos aportados!</h4>
+          </div>
+        {%else%}
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>OrderId</th>
+              <th>CreationDate</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for c in datos["list"] %}
+            <tr>
+              <td class="text-success"> <a href="http://127.0.0.1:5000/orders_detail_query?q={{c.orderId}} ">{{c.orderId}}</a> </td>
+              <td class="text-success"> {{c.creationDate}} </td>
+              <td class="text-success"> {{c.status}} </td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        
+        {% endif %} 
+        <div class="d-flex justify-content-center my-5">
+            <button type="button" class="btn btn-dark" onclick="recargarPagina()">Volver</button>
+          </div>
+        </div>
+        <script>
+          function recargarPagina() {
+            location.reload(); // Llama a la función reload en el objeto location para recargar la página
+          }
+        </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>inicio</title>
+    
+</head>
+<body>
+{% extends "base_template.html" %}
+
+{% block content %}
+   
+  <div class="container">
+    <h1 class="text-center my-5">{{ data.titulo }}</h1>
+ 
+
+    <h2>Solicitud de datos</h2>
+    <form class="text-center" method="post">
+        <div class="form-group"></div>
+            <div class="row">
+                <div class="col-4">
+                    <label for="account">Account</label>
+                    <input id="account" name="account" type="text" class="form-control" value="{{ account }}" disabled>
+                </div>
+            
+                <div class="col-4">
+                    <label for="appkey">Appkey</label>
+                    <input  id="appkey" name="appkey" type="text" class="form-control" value="{{ appkey }}" disabled>
+                </div>
+
+                <div class="col-4">
+                    <label for="apptoken">Apptoken</label>
+                    <input id="apptoken" name="apptoken" type="text" class="form-control" value="{{ apptoken }}" disabled>
+                </div>
+            </div>
+        </div>
+       
+        <div class="text-center mt-5 ">
+          <button id="btn-click" class="btn btn-dark mx-auto" type ="button" onclick="" >Validar credenciales</button>
+          <button class="btn btn-success" id="modificar-credenciales">Modificar Credenciales</button>
+        </div>
+        <script>
+          // Inicializar variables para el estado de los inputs
+          var accountEnabled = false;
+          var appkeyEnabled = false;
+          var apptokenEnabled = false;
+        
+          document.getElementById("modificar-credenciales").addEventListener("click", function(event) {
+            // Prevenir comportamiento predeterminado del botón
+            event.preventDefault();
+        
+            // Activar inputs solo si no están ya activados
+            if (!accountEnabled) {
+              document.getElementById("account").disabled = false;
+              accountEnabled = true;
+            }
+            if (!appkeyEnabled) {
+              document.getElementById("appkey").disabled = false;
+              appkeyEnabled = true;
+            }
+            if (!apptokenEnabled) {
+              document.getElementById("apptoken").disabled = false;
+              apptokenEnabled = true;
+            }
+          });
+        </script>
+        
+        <div id="respuesta"></div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $("#btn-click").click(function() {
+              $.ajax({
+                url: "/credenciales",
+                type: "POST",
+                contentType:"application/json",
+                dataType:"json",
+                data: JSON.stringify({
+                  account: $("#account").val(),
+                  appkey: $("#appkey").val(),
+                  apptoken: $("#apptoken").val()
+                }),
+                success: function(response) {
+                  if (response["result"] === "ok") {
+                    $("#respuesta").html("<h4 class='mt-5' style='color: green;text-align: center;'>Credenciales válidas</h4>");
+                    setTimeout(function() {
+                      var account = $("#account").val();
+                      var appkey = $("#appkey").val();
+                      var apptoken = $("#apptoken").val();
+                      var queryString = "?account=" + account + "&appkey=" + appkey + "&apptoken=" + apptoken;
+                      window.location.href = "/customer_query" + queryString;
+                    }, 1000)
+                  }  else if (response["result"] === "error"){
+            $("#respuesta").html("<h4 style='color: red;text-align: center;'>Credenciales inválidas</h4>");
+            setTimeout(function() {
+              location.reload(); // Refrescar la página después de 3 segundos
+            }, 3000)
+          }
+        }
+      }); 
+    });  
+  });
+</script>
+        
+    </form>  
+    
+{%endblock%}
+  </div>
+</body>
+</html>

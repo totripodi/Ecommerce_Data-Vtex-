@@ -1,0 +1,75 @@
+
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   </head>
+   <body>
+    
+    <!--  opc_1.html -->
+    <div class="container">
+        <h1 class="text-center my-5">Datos del cliente</h1>
+        
+       {% if datos_f%}
+       <table class="table">
+        <tbody>
+          {% for c in datos_f %}
+          <tr>
+            <td class="text-success">email:</td>
+            <td class="text-success">{{c.email}}</td>
+          </tr>
+          <tr>
+            <td class="text-success">userId:</td>
+            <td class="text-success">{{c.userId}}</td>
+          </tr>
+          <tr>
+            <td class="text-success">firstName:</td>
+            <td class="text-success">{{c.firstName}}</td>
+          </tr>
+          <tr>
+            <td class="text-success">lastName:</td>
+            <td class="text-success">{{c.lastName}}</td>
+          </tr>
+          <tr>
+            <td class="text-success">isNewsletterOptIn:</td>
+            <td class="text-success">{{c.isNewsletterOptIn}}</td>
+          </tr>
+          <tr>
+            <td class="text-success">createdIn:</td>
+            <td class="text-success">{{c.createdIn}}</td>
+          </tr>
+          <tr>
+            <td class="text-success">updatedIn:</td>
+            <td class="text-success">{{c.updatedIn}}</td>
+          </tr>
+          <tr>
+            <td class="text-success">lastInteractionIn:</td>
+            <td class="text-success">{{c.lastInteractionIn}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center my-3">
+        <button type="button" class="btn btn-primary mr-2" onclick="history.back()">Volver</button>
+        <button type="button" class="btn btn-success ml-2" onclick="window.location.href='/orders_query?email={{c.email}}'"> Ver ordenes</button>
+      </div>
+      {% endfor %}
+
+        {%else%}
+        
+        <div style="text-align: center;">
+            <h4 style="background-color:red; color:white; display:inline-block; padding:5px; margin:auto;border-radius: 10px;">El cliente no existe</h4>
+          </div>
+
+          <div class="d-flex justify-content-center my-3">
+            <button type="button" class="btn btn-primary" onclick="history.back()">Volver</button>
+          
+          </div>
+        
+        {%endif%}
+        
+</body>
+   </html>
