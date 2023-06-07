@@ -2,8 +2,7 @@ from flask import Flask , render_template , request , jsonify , session
 import requests , json
 
 app = Flask(__name__)
-#app = Flask(__name__)
-#app.secret_key= "hello"
+app.secret_key= "tomas_dev"
 
 #################LOGIN###########################
 @app.route('/',methods=['GET', 'POST'])
@@ -29,6 +28,7 @@ def login():
 
     # Obtener los valores de las credenciales guardados en la sesión, si existen
     account = session.get('account')
+    print('aca')
     appkey = session.get('appkey')
     apptoken = session.get('apptoken')
 

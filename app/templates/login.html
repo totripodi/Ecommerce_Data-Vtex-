@@ -10,7 +10,7 @@
     
 </head>
 <body>
-{% extends "base_template.html" %}
+{% extends "home_template.html" %}
 
 {% block content %}
    
@@ -43,33 +43,43 @@
           <button id="btn-click" class="btn btn-dark mx-auto" type ="button" onclick="" >Validar credenciales</button>
           <button class="btn btn-success" id="modificar-credenciales">Modificar Credenciales</button>
         </div>
+        
         <script>
-          // Inicializar variables para el estado de los inputs
-          var accountEnabled = false;
-          var appkeyEnabled = false;
-          var apptokenEnabled = false;
-        
-          document.getElementById("modificar-credenciales").addEventListener("click", function(event) {
-            // Prevenir comportamiento predeterminado del botón
-            event.preventDefault();
-        
-            // Activar inputs solo si no están ya activados
-            if (!accountEnabled) {
-              document.getElementById("account").disabled = false;
-              accountEnabled = true;
-            }
-            if (!appkeyEnabled) {
-              document.getElementById("appkey").disabled = false;
-              appkeyEnabled = true;
-            }
-            if (!apptokenEnabled) {
-              document.getElementById("apptoken").disabled = false;
-              apptokenEnabled = true;
-            }
-          });
+         document.addEventListener("DOMContentLoaded", function(event) {
+          // Eliminar valor "None" y habilitar inputs si su valor es "None"
+          if (document.getElementById("account").value === "None") {
+            document.getElementById("account").value = "";
+            document.getElementById("account").disabled = false;
+          }
+          if (document.getElementById("appkey").value === "None") {
+            document.getElementById("appkey").value = "";
+            document.getElementById("appkey").disabled = false;
+          }
+          if (document.getElementById("apptoken").value === "None") {
+            document.getElementById("apptoken").value = "";
+            document.getElementById("apptoken").disabled = false;
+          }
+        });
+
+        document.getElementById("modificar-credenciales").addEventListener("click", function(event) {
+          // Prevenir comportamiento predeterminado del botón
+          event.preventDefault();
+
+          // Habilitar inputs solo si su valor es "None"
+          if (document.getElementById("account").value === "None") {
+            document.getElementById("account").disabled = false;
+          }
+          if (document.getElementById("appkey").value === "None") {
+            document.getElementById("appkey").disabled = false;
+          }
+          if (document.getElementById("apptoken").value === "None") {
+            document.getElementById("apptoken").disabled = false;
+          }
+        });
         </script>
         
         <div id="respuesta"></div>
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
           $(document).ready(function() {
@@ -105,9 +115,7 @@
     });  
   });
 </script>
-        
     </form>  
-    
 {%endblock%}
   </div>
 </body>

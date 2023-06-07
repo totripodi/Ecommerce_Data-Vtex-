@@ -12,12 +12,12 @@ py -m venv env
 .\env\Scripts\activate
 
 #Instalamos las dependencias
-pip install
+pip install flask
 pip install requests
 pip install json
 
 #Ejecuta la aplicación utilizando el comando: 
-python .\app\app.py.
+python .\app\app.py
 
 #Accede a la aplicación en tu navegador utilizando la dirección local proporcionada.
 
