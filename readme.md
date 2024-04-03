@@ -5,7 +5,7 @@ Flask_t
 -Email: tomastripodi99@gmail.com
 -Tel: +54 011 33315761
 
-#Flask_t es una aplicación web desarrollada por mi utilizando Flask, que permite interactuar con la API de VTEX para obtener información relacionada con clientes, pedidos y productos.
+#Flask_t es una aplicación web desarrollada en python con el framework Flask, que permite interactuar con la API de VTEX para obtener información relacionada con clientes, pedidos y productos.
 
 Instalación:
 -Clona el repositorio en tu máquina local.
