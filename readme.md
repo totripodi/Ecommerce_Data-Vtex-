@@ -7,15 +7,16 @@ Flask_t
 
 #Flask_t es una aplicación web desarrollada en python con el framework Flask, que permite interactuar con la API de VTEX para obtener información relacionada con clientes, pedidos y productos.
 
-Instalación:
--Clona el repositorio en tu máquina local.
--Crea un entorno virtual e instala las dependencias del proyecto:
+#Instalación: -Clona el repositorio en tu máquina local.
+https://github.com/totripodi/Ecommerce_Data-Vtex
 
-#Creamos el entorno virtual
-py -m venv env
+#Crea un entorno virtual e instala las dependencias del proyecto:
+
+#Creamos el entorno virtual  (IMPORTANTE: los comandos utilizados son para una terminal Git Bash)
+python -m venv env
 
 #Activamos el entorno virtual:
-.\env\Scripts\activate
+source env/Scripts/activate
 
 #Instalamos las dependencias
 pip install flask
